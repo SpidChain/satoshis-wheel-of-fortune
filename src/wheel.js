@@ -1,42 +1,51 @@
 import  'pixi.js/dist/pixi.js'
 
-const initWheel = () => {
-  console.log('ciro')
-  console.log(PIXI)
-  const app = new PIXI.Application(800, 600, { antialias: true })
-  console.log(document)
-  document.body.appendChild(app.view)
-
-
-  const container = new PIXI.Container();
-
-  app.stage.interactive = true
-  app.stage.addChild(container)
-
-  const graphics = new PIXI.Graphics()
+const wheelCenterX = 250
+const wheelCenterY = 300
+const stageWidth = 500
+const stageHeigth = 200
+const startAngle = 0
+const arc = Math.PI/4
+const drawWheel = () => {
+  const wheel = new PIXI.Graphics()
   // set a fill and line style
-  graphics.beginFill(0xFF3300)
-  graphics.lineStyle(10, 0xffd900, 1)
+  wheel.lineStyle(2, 0xffd900, 1)
+  const outsideRadius =  200
+  const textRadius = 160
+  const insideRadius = 125
 
-  // draw a shape
-  graphics.moveTo(50,50)
-  graphics.lineTo(250, 50)
-  graphics.lineTo(100, 100)
-  graphics.lineTo(250, 220)
-  graphics.lineTo(50, 220)
-  graphics.lineTo(50, 50)
-  graphics.endFill()
-  container.x = app.renderer.width / 2;
-  container.y = app.renderer.height / 2;
-  container.pivot.x = container.width / 2;
-  container.pivot.y = container.height / 2;
-  //container.rotation = 1
-  container.addChild(graphics)
+  for (let i = 0; i < 8; i++) {
+   let angle = startAngle + i * arc
+    console.log("position ",wheel.position)
+    console.log("x,y ",wheel.x,wheel.y)
+    wheel.beginFill()
+    wheel.arc(wheelCenterX, wheelCenterY, outsideRadius, angle, angle + arc, true)
+    wheel.arc(wheelCenterX, wheelCenterY, insideRadius, angle + arc, angle, false)
+    //graphics.addHole()
+    wheel.endFill()
+    const basicText = new PIXI.Text('Basic text in pixi');
+    basicText.x = 0;
+    basicText.y = 0;
+  }
+  return wheel
+}
+
+
+const initWheel = () => {
+  const app = new PIXI.Application(stageWidth, stageHeigth, { antialias: true })
+  document.body.appendChild(app.view)
+  const wheel = drawWheel()
+  wheel.x = app.renderer.width / 2
+  wheel.y = app.renderer.height / 2
+  wheel.pivot.x = app.renderer.width / 2
+  wheel.pivot.y = app.renderer.height / 2
+  // container.addChild(graphics)
+  app.stage.addChild(wheel)
   app.ticker.add(function(delta) {
     // rotate the container!
     // use delta to create frame-independent tranform
-    container.rotation -= 0.01 * delta
-  });
+  //  wheel.rotation -= 0.01 * delta
+  })
 }
 
 export {initWheel}
