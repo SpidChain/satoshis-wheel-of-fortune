@@ -4,12 +4,13 @@ const submitHandler = e => {
   e.preventDefault()
   const blocknumber = e.target.blocknumber.value
   const participants = e.target.participants.value
-  console.log(value)
-  if (value !== '') {
-    Meteor.call('setBlockNumber', blocknumber)
-    Meteor.call('addParticipants', participants)
-    e.target.reset()
+  if (blocknumber !== '') {
+    Meteor.call('setBlocknumber', blocknumber)
   }
+  if (participants !== '') {
+    Meteor.call('addParticipants', participants)
+  }
+  e.target.reset()
 }
 
 const Form = ({setCounter}) => {
