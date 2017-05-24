@@ -4,6 +4,7 @@ import {Col, Container, Row} from 'reactstrap'
 
 import emails from './emails'
 import BlockNumberForm from './BlockNumberForm'
+import ConnectionAlert from './ConnectionAlert'
 import ResultForm from './ResultForm'
 import WheelCanvas from './WheelCanvas'
 import Winner from './Winner'
@@ -17,6 +18,7 @@ const Main = createReactClass({
 
   getInitialState: () => ({
     blockNumber: undefined,
+    connectionActive: false,
     fetching: false,
     nonce: undefined,
     pinger: undefined,
@@ -25,7 +27,7 @@ const Main = createReactClass({
     spinning: false
   }),
 
-  waitForBlock (height) {
+  startConnection () {
     const socket = new window.WebSocket(wsUrl)
     const that = this
 
@@ -35,28 +37,47 @@ const Main = createReactClass({
 
     socket.addEventListener('open', (event) => {
       socket.send('{"op":"blocks_sub"}')
+
+      // Ping the server every 30 seconds to keeps the connection alive
       const pinger = setInterval(() => {
         console.log('Pinging...')
         socket.send('{"op":"ping"}')
       }, 30000)
+
       that.setState({
+        connectionActive: true,
         pinger: pinger
+      })
+    })
+
+    socket.addEventListener('close', (event) => {
+      clearInterval(this.state.pinger)
+      that.setState({
+        connectionActive: false,
+        pinger: undefined,
+        socket: undefined
       })
     })
 
     socket.addEventListener('message', (event) => {
       const data = JSON.parse(event.data)
+      const height = that.state.blockNumber
       if (data.op === 'block') {
         const block = data.x
         console.log('New block:', block)
-        if (block.height === height) {
+        if (block.height === height && this.state.fetching) {
           console.log('Nonce:', block.nonce)
           that.setState({
+            fetching: false,
             nonce: block.nonce
           })
         }
       }
     })
+  },
+
+  componentWillMount () {
+    this.startConnection()
   },
 
   componentWillUnmount () {
@@ -75,34 +96,26 @@ const Main = createReactClass({
       .then((hash) => window.fetch(blockUrl + hash))
       .then((response) => response.json())
       .then((block) => {
-        const nonce = block.nonce
-        this.setState({
-          fetching: false,
-          nonce: nonce
-        })
-        console.log('Nonce:', nonce)
+        if (this.state.fetching) {
+          const nonce = block.nonce
+          this.setState({
+            fetching: false,
+            nonce: nonce
+          })
+          console.log('Nonce:', nonce)
+        }
       })
       .catch(() => {
         console.log('Waiting for block:', blockNumber)
-        this.waitForBlock(blockNumber)
       })
   },
 
   reset () {
-    if (this.state.pinger) {
-      clearInterval(this.state.pinger)
-    }
-
-    if (this.state.socket) {
-      this.state.socket.close()
-    }
-
     this.setState({
       blockNumber: undefined,
+      fetching: false,
       nonce: undefined,
-      pinger: undefined,
-      showResult: false,
-      socket: undefined
+      showResult: false
     })
   },
 
@@ -128,6 +141,8 @@ const Main = createReactClass({
           <BlockNumberForm onBlockNumber={this.getNonce} onReset={this.reset} />
           <br />
           <ResultForm blockNumber={this.state.blockNumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
+          <br />
+          <ConnectionAlert active={this.state.connectionActive} />
         </Col>
       </Row>
     </Container>
