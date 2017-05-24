@@ -127,6 +127,10 @@ const Main = createReactClass({
   },
 
   render () {
+    console.log('participants',this.props.participants)
+    if(this.props.loading) {
+      return <p> loading </p>
+    }
     return <Container fluid>
       <Row>
         <Col md='12'>
@@ -135,12 +139,12 @@ const Main = createReactClass({
       </Row>
       <Row>
         <Col md='9'>
-          <WheelCanvas emails={emails} nonce={this.state.nonce} spinning={this.state.spinning} onStop={this.stopSpin} />
+          <WheelCanvas emails={this.props.participants} nonce={this.state.nonce} spinning={this.state.spinning} onStop={this.stopSpin} />
         </Col>
         <Col md='3'>
           <BlockNumberForm onBlockNumber={this.getNonce} onReset={this.reset} />
           <br />
-          <ResultForm blockNumber={this.state.blockNumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
+          <ResultForm blockNumber={this.props.blockNumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
           <br />
           <ConnectionAlert active={this.state.connectionActive} />
         </Col>
