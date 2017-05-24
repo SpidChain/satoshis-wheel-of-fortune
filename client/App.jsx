@@ -17,7 +17,7 @@ Meteor.startup(() => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <a className="navbar-brand" href="#">Spidchain</a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/participants">Participants</Link></li>
@@ -25,7 +25,7 @@ Meteor.startup(() => {
             </ul>
           </div>
           </nav>
-          <Route exact='true' path="/" component={Main}/>
+          <Route exact={true} path="/" component={Main}/>
           <Route path="/setup" component={Setup}/>
           <Route path="/participants" component={ParticipantsContainer}/>
         </div>
