@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Route, hashHistory } from 'react-router-dom'
+
 import Tether from 'tether'
 // Export Bootstrap
 window.Tether = Tether
@@ -11,7 +13,12 @@ import {initWheel} from '/imports/client/wheel'
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<Main />, document.getElementById('app'))
+
+  ReactDOM.render(
+    <BrowserRouter history={hashHistory}>
+      <Route path="/" component={Main}/>
+    </BrowserRouter>,
+    document.getElementById('app'))
   initWheel()
 })
 
