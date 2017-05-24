@@ -144,7 +144,7 @@ const Main = createReactClass({
         <Col md='3'>
           <BlockNumberForm onBlockNumber={this.getNonce} onReset={this.reset} />
           <br />
-          <ResultForm blockNumber={this.props.blockNumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
+          <ResultForm blockNumber={this.props.blocknumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
           <br />
           <ConnectionAlert active={this.state.connectionActive} />
         </Col>
