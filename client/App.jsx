@@ -12,8 +12,7 @@ import Main from '/imports/client/Main'
 import {initWheel} from '/imports/client/wheel'
 
 
-document.addEventListener('DOMContentLoaded', () => {
-
+Meteor.startup(() => {
   ReactDOM.render(
     <BrowserRouter history={hashHistory}>
       <Route path="/" component={Main}/>
