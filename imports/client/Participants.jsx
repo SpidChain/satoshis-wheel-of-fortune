@@ -1,16 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+import {Col, Container, Row} from 'reactstrap'
 
 const Participants = ({participants, loading}) => {
-  if(loading) {
-    return (<p> loading... </p>)
+    return (
+      <Container fluid>
+        <Row>
+          <Col md='12'>
+            {loading ?
+                <p> loading... </p>
+                : <ul> {participants.map( e => <li> {e.name} </li>)} </ul>
+            }
+          </Col>
+        </Row>
+      </Container>
+    )
   }
-  return (
-        <ul>
-          {participants.map( e => <li> {e.name} </li>)}
-        </ul>
-  )
-}
+
 
 export default Participants
