@@ -1,19 +1,23 @@
 import React from 'react'
 
-const submitHandler = setCounter => e => {
+const submitHandler = e => {
   e.preventDefault()
-  const value = e.target.participants.value
+  const blocknumber = e.target.blocknumber.value
+  const participants = e.target.participants.value
   console.log(value)
   if (value !== '') {
-    Meteor.call('addParticipants', value)
+    Meteor.call('setBlockNumber', blocknumber)
+    Meteor.call('addParticipants', participants)
     e.target.reset()
   }
 }
 
 const Form = ({setCounter}) => {
   return (
-    <form onSubmit={submitHandler(setCounter)}>
-      <textarea name='participants' placeholder='participants' rows='10' cols='30' className='form-control' > </textarea>
+    <form onSubmit={submitHandler}>
+      <input type='number' name='blocknumber' placeholder='blocknumber' className='form-control'/>
+      <textarea name='participants' rows='10' cols='30' className='form-control' >
+      </textarea>
       <button type='submit' className='btn btn-primary form-control'> Submit </button>
     </form>
   )
