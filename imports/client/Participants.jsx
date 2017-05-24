@@ -9,7 +9,7 @@ const Participants = ({participants, loading}) => {
           <Col md='12'>
             {loading ?
                 <p> loading... </p>
-                : <ul> {participants.map( e => <li> {e.name} </li>)} </ul>
+                : <ol> {participants.map( e => <li> {e.name} </li>)} </ol>
             }
           </Col>
         </Row>
