@@ -11,12 +11,15 @@ const MainContainer = createContainer(() => {
   const loading = !(participantsHandle.ready() && blocknumberHandle.ready())
   const participants = ParticipantsC.find({}).fetch()
   const blocknumber = Blocknumber.findOne({})
+  const number = blocknumber
+    ? blocknumber.blocknumber
+    : undefined
   console.log('participants', participants)
-  console.log('blocknumber', blocknumber)
+  console.log('blocknumber', blocknumber, number)
   return {
     loading,
     participants,
-    blocknumber
+    blockNumber: number
   }
 }, Main)
 

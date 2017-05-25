@@ -2,7 +2,6 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 import {Col, Container, Row} from 'reactstrap'
 
-import BlockNumberForm from './BlockNumberForm'
 import ConnectionAlert from './ConnectionAlert'
 import ResultForm from './ResultForm'
 import WheelCanvas from './WheelCanvas'
@@ -16,7 +15,6 @@ const Main = createReactClass({
   displayName: 'Main',
 
   getInitialState: () => ({
-    blockNumber: undefined,
     connectionActive: false,
     fetching: false,
     nonce: undefined,
@@ -60,7 +58,7 @@ const Main = createReactClass({
 
     socket.addEventListener('message', (event) => {
       const data = JSON.parse(event.data)
-      const height = that.state.blockNumber
+      const height = this.props.blockNumber
       if (data.op === 'block') {
         const block = data.x
         console.log('New block:', block)
@@ -77,6 +75,13 @@ const Main = createReactClass({
 
   componentWillMount () {
     this.startConnection()
+    this.getNonce(this.props.blockNumber)
+  },
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.blockNumber !== nextProps.blockNumber) {
+      this.getNonce(nextProps.blockNumber)
+    }
   },
 
   componentWillUnmount () {
@@ -84,9 +89,13 @@ const Main = createReactClass({
   },
 
   getNonce (blockNumber) {
-    this.reset()
+    console.log('Block number:', blockNumber)
+
+    if (!Number.isInteger(blockNumber)) {
+      return
+    }
+
     this.setState({
-      blockNumber: blockNumber,
       fetching: true
     })
     window.fetch(blockHashUrl + blockNumber)
@@ -109,19 +118,9 @@ const Main = createReactClass({
       })
   },
 
-  reset () {
-    this.setState({
-      blockNumber: undefined,
-      fetching: false,
-      nonce: undefined,
-      showResult: false
-    })
-  },
-
   stopSpin () {
     this.setState({
       showResult: true
-//      spinning: false
     })
   },
 
@@ -142,9 +141,7 @@ const Main = createReactClass({
           <WheelCanvas emails={names} nonce={this.state.nonce} spinning={this.state.spinning} onStop={this.stopSpin} />
         </Col>
         <Col md='3'>
-          <BlockNumberForm onBlockNumber={this.getNonce} onReset={this.reset} />
-          <br />
-          <ResultForm blockNumber={this.props.blocknumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={names.length} />
+          <ResultForm blockNumber={this.props.blockNumber} nonce={this.state.showResult && this.state.nonce} partecipants={names.length} />
           <br />
           <ConnectionAlert active={this.state.connectionActive} />
         </Col>

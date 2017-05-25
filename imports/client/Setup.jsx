@@ -6,7 +6,11 @@ const submitHandler = e => {
   const blocknumber = e.target.blocknumber.value
   const participants = e.target.participants.value
   if (blocknumber !== '') {
-    Meteor.call('setBlocknumber', blocknumber)
+    try {
+      Meteor.call('setBlocknumber', parseInt(blocknumber))
+    } catch (e) {
+      console.error(e)
+    }
   }
   if (participants !== '') {
     Meteor.call('addParticipants', participants)
