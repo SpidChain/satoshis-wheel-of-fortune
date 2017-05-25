@@ -5,7 +5,7 @@ import {BrowserRouter, Route, browserHistory} from 'react-router-dom'
 
 import NavBar from '/imports/client/NavBar'
 import MainContainer from '/imports/client/MainContainer'
-import Setup from '/imports/client/Setup'
+import SetupContainer from '/imports/client/SetupContainer'
 import ParticipantsContainer from '/imports/client/ParticipantsContainer'
 
 Meteor.startup(() => {
@@ -14,7 +14,7 @@ Meteor.startup(() => {
       <div>
         <NavBar />
         <Route exact path='/' component={MainContainer} />
-        <Route exact path='/setup' component={Setup} />
+        <Route exact path='/setup' component={SetupContainer} />
         <Route exact path='/participants' component={ParticipantsContainer} />
       </div>
     </BrowserRouter>,

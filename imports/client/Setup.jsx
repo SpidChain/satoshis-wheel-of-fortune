@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from './Login'
 
 const submitHandler = e => {
   e.preventDefault()
@@ -13,9 +14,10 @@ const submitHandler = e => {
   e.target.reset()
 }
 
-const Form = ({setCounter}) => {
-  return (
-    <form onSubmit={submitHandler}>
+const Form = ({userId}) => {
+  return ! userId
+  ? <Login/>
+  : (<form onSubmit={submitHandler}>
       <input type='number' name='blocknumber' placeholder='blocknumber' className='form-control'/>
       <textarea name='participants' rows='10' cols='30' className='form-control' >
       </textarea>
