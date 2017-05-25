@@ -8,8 +8,7 @@ import WheelCanvas from './WheelCanvas'
 import Winner from './Winner'
 
 const wsUrl = 'wss://ws.blockchain.info/inv'
-const blockHashUrl = 'https://blockexplorer.com/api/block-index/'
-const blockUrl = 'https://blockexplorer.com/api/block/'
+const blockUrl = 'https://api-r.bitcoinchain.com/v1/block/'
 
 const Main = createReactClass({
   displayName: 'Main',
@@ -98,14 +97,11 @@ const Main = createReactClass({
     this.setState({
       fetching: true
     })
-    window.fetch(blockHashUrl + blockNumber)
+    window.fetch(blockUrl + blockNumber)
       .then((response) => response.json())
-      .then((obj) => obj.blockHash)
-      .then((hash) => window.fetch(blockUrl + hash))
-      .then((response) => response.json())
-      .then((block) => {
+      .then((blocks) => {
         if (this.state.fetching) {
-          const nonce = block.nonce
+          const nonce = blocks[0].nonce
           this.setState({
             fetching: false,
             nonce: nonce
