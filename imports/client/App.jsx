@@ -11,7 +11,7 @@ const App = ({loading, participants, blockNumber, userId}) => {
   console.log('participants are', participants)
   return (<BrowserRouter history={browserHistory}>
     <div>
-      <NavBar />
+      <NavBar userId={userId}/>
       <Route exact path='/' component={props => <Main
           loading={loading}
           participants={participants}
