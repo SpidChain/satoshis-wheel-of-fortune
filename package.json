@@ -1,8 +1,17 @@
 {
   "name": "lottery",
   "version": "0.1.0",
-  "description": "Satoshi’￼￼s Wheel of Fortune",
-  "author": "Nicola Squartini e Federico Squartini",
+  "description": "Satoshi's Wheel of Fortune",
+  "contributors": [
+    {
+      "name": "Federico Squartini",
+      "email": "federico.squartini@gmail.com"
+    },
+    {
+      "name": "Nicola Squartini",
+      "email": "tensor5@gmail.com"
+    }
+  ],
   "license": "MIT",
   "homepage": "https://bitbucket.org/idchain/lottery#readme",
   "private": true,
