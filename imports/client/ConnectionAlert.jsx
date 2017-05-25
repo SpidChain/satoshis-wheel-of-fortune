@@ -1,7 +1,7 @@
 import React from 'react'
 import {Alert} from 'reactstrap'
 
-const Link = () => <a href='https://blockchain.info/'>blockchain.info</a>
+const Link = () => <a target='_blank' href='https://blockchain.info/'>blockchain.info</a>
 
 const ConnectionAlert = ({active}) => active
   ? <Alert color='success'>
