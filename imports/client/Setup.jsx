@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Form, FormGroup, Input} from 'reactstrap'
+import {Button, Col, Container, Form, FormGroup, FormText, Input, Label, Row} from 'reactstrap'
 import {Meteor} from 'meteor/meteor'
 
 import Login from './Login'
@@ -22,15 +22,26 @@ const submitHandler = e => {
 }
 
 const Setup = ({userId}) => !userId
-  ? <Login />
-  : <Form onSubmit={submitHandler}>
-    <FormGroup>
-      <Input type='number' name='blocknumber' placeholder='blocknumber' />
-    </FormGroup>
-    <FormGroup>
-      <Input type='textarea' name='participants' rows='10' cols='30' />
-    </FormGroup>
-    <Button type='submit' color='primary' block> Submit </Button>
-  </Form>
+  ? <Container fluid><Row><Col xs='12'><Login /></Col></Row></Container>
+  : <Container fluid>
+    <Row>
+      <Col xs='12'>
+        <Form onSubmit={submitHandler}>
+          <FormGroup>
+            <Label>Numero blocco</Label>
+            <Input type='number' name='blocknumber' placeholder='blocknumber' />
+          </FormGroup>
+          <FormGroup>
+            <Label>Lista partecipanti</Label>
+            <Input type='textarea' name='participants' rows='10' cols='30' />
+            <FormText color='muted'>
+              Inserire le email dei partecipanti, una per riga.
+            </FormText>
+          </FormGroup>
+          <Button type='submit' color='primary' block> Submit </Button>
+        </Form>
+      </Col>
+    </Row>
+  </Container>
 
 export default Setup
