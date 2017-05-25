@@ -12,7 +12,9 @@ Meteor.methods({
   },
 
   setBlocknumber: (blocknumber) => {
-    Blocknumber.remove({})
-    Blocknumber.insert({blocknumber})
+    if (Number.isInteger(blocknumber) && blocknumber >= 0) {
+      Blocknumber.remove({})
+      Blocknumber.insert({blocknumber})
+    }
   }
 })
