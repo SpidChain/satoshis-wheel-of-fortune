@@ -2,7 +2,6 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 import {Col, Container, Row} from 'reactstrap'
 
-import emails from './emails'
 import BlockNumberForm from './BlockNumberForm'
 import ConnectionAlert from './ConnectionAlert'
 import ResultForm from './ResultForm'
@@ -127,6 +126,7 @@ const Main = createReactClass({
   },
 
   render () {
+    const names = this.props.participants.map((e) => e.name)
     console.log('participants', this.props.participants)
     if (this.props.loading) {
       return <p> loading </p>
@@ -134,17 +134,17 @@ const Main = createReactClass({
     return <Container fluid>
       <Row>
         <Col md='12'>
-          <Winner winner={this.state.showResult && emails[this.state.nonce % emails.length]} />
+          <Winner winner={this.state.showResult && names[this.state.nonce % names.length]} />
         </Col>
       </Row>
       <Row>
         <Col md='9'>
-          <WheelCanvas emails={this.props.participants} nonce={this.state.nonce} spinning={this.state.spinning} onStop={this.stopSpin} />
+          <WheelCanvas emails={names} nonce={this.state.nonce} spinning={this.state.spinning} onStop={this.stopSpin} />
         </Col>
         <Col md='3'>
           <BlockNumberForm onBlockNumber={this.getNonce} onReset={this.reset} />
           <br />
-          <ResultForm blockNumber={this.props.blocknumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={emails.length} />
+          <ResultForm blockNumber={this.props.blocknumber.blocknumber} nonce={this.state.showResult && this.state.nonce} partecipants={names.length} />
           <br />
           <ConnectionAlert active={this.state.connectionActive} />
         </Col>
