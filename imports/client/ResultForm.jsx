@@ -1,7 +1,6 @@
 import React from 'react'
 import {Col, Form, FormGroup, Label} from 'reactstrap'
 
-
 const ResultForm = ({blockNumber, nonce, partecipants}) => (
   <Form>
     <FormGroup row>

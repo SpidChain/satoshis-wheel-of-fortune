@@ -127,8 +127,8 @@ const Main = createReactClass({
   },
 
   render () {
-    console.log('participants',this.props.participants)
-    if(this.props.loading) {
+    console.log('participants', this.props.participants)
+    if (this.props.loading) {
       return <p> loading </p>
     }
     return <Container fluid>

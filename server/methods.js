@@ -1,3 +1,8 @@
+import {Meteor} from 'meteor/meteor'
+
+import Blocknumber from '/imports/collections/blocknumber'
+import ParticipantsC from '/imports/collections/partecipants'
+
 Meteor.methods({
   addParticipants: (participants) => {
     ParticipantsC.remove({})

@@ -1,3 +1,7 @@
+import {Meteor} from 'meteor/meteor'
+
+import Blocknumber from '/imports/collections/blocknumber'
+
 Meteor.publish('blocknumber', () => {
   /*
   return Lists.find({
@@ -7,4 +11,4 @@ Meteor.publish('blocknumber', () => {
   });
   */
   return Blocknumber.find()
-});
+})

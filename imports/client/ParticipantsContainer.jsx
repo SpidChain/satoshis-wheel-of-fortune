@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor'
 import { createContainer } from 'meteor/react-meteor-data'
+
+import ParticipantsC from '/imports/collections/partecipants'
 import Participants from '/imports/client/Participants'
 
-export default ParticipantsContainer = createContainer(() => {
+const ParticipantsContainer = createContainer(() => {
   const participantsHandle = Meteor.subscribe('participants')
   const loading = !participantsHandle.ready()
   const participants = ParticipantsC.find({}).fetch()
@@ -12,3 +14,5 @@ export default ParticipantsContainer = createContainer(() => {
     participants
   }
 }, Participants)
+
+export default ParticipantsContainer
