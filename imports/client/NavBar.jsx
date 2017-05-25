@@ -25,7 +25,8 @@ const NavBar = createReactClass({
     console.log(this.props.userId)
     const LogoutButton = this.props.userId
       ? <Button onClick={this.logout}>Logout</Button>
-      : <div />
+      : null
+
     return <Navbar toggleable='xs' light color='faded'>
       <NavbarToggler onClick={this.toggle} right data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation' />
       <NavbarBrand>Spidchain</NavbarBrand>
