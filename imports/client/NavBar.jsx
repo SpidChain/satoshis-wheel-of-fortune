@@ -29,7 +29,7 @@ const NavBar = createReactClass({
 
     return <Navbar toggleable='xs' light color='faded'>
       <NavbarToggler onClick={this.toggle} right data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation' />
-      <NavbarBrand>Spidchain</NavbarBrand>
+      <NavbarBrand>Satoshi’￼￼s Wheel of Fortune</NavbarBrand>
       <Collapse navbar isOpen={this.state.isOpen} id='navbarSupportedContent'>
         <Nav navbar className='mr-auto'>
           <NavItem>
