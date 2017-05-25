@@ -17,7 +17,7 @@ const NavBar = createReactClass({
   },
 
   render () {
-    return <Navbar toggleable='md' light color='faded'>
+    return <Navbar toggleable='xs' light color='faded'>
       <NavbarToggler onClick={this.toggle} right data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation' />
       <NavbarBrand>Spidchain</NavbarBrand>
       <Collapse navbar isOpen={this.state.isOpen} id='navbarSupportedContent'>
