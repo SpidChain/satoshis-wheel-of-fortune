@@ -1,7 +1,7 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
 import {Collapse, Nav, NavItem, Navbar, NavbarBrand, NavbarToggler} from 'reactstrap'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const NavBar = createReactClass({
   displayName: 'NavBar',
@@ -22,9 +22,21 @@ const NavBar = createReactClass({
       <NavbarBrand>Spidchain</NavbarBrand>
       <Collapse navbar isOpen={this.state.isOpen} id='navbarSupportedContent'>
         <Nav navbar className='mr-auto'>
-          <NavItem className='active'><Link className='nav-link' to='/'>Home</Link></NavItem>
-          <NavItem><Link className='nav-link' to='/participants'>Participants</Link></NavItem>
-          <NavItem><Link className='nav-link' to='/setup'>Setup</Link></NavItem>
+          <NavItem>
+            <NavLink className='nav-link' to='/' exact activeClassName='active'>
+                Home
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className='nav-link' to='/participants' exact activeClassName='active'>
+                Participants
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink className='nav-link' to='/setup' exact activeClassName='active'>
+                Setup
+            </NavLink>
+          </NavItem>
         </Nav>
       </Collapse>
     </Navbar>

@@ -14,8 +14,8 @@ Meteor.startup(() => {
       <div>
         <NavBar />
         <Route exact path='/' component={MainContainer} />
-        <Route path='/setup' component={Setup} />
-        <Route path='/participants' component={ParticipantsContainer} />
+        <Route exact path='/setup' component={Setup} />
+        <Route exact path='/participants' component={ParticipantsContainer} />
       </div>
     </BrowserRouter>,
       document.getElementById('app'))
