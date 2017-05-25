@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button, Form, FormGroup, Input} from 'reactstrap'
 
 const submitHandler = e => {
   e.preventDefault()
@@ -11,12 +12,18 @@ const submitHandler = e => {
   })
 }
 
-export default Login = () => {
+const Login = () => {
   return (
-    <form onSubmit={submitHandler}>
-      <input type='text' name='username' placeholder='username' className='form-control' />
-      <input type='password' name='password' className='form-control' />
-      <button type='submit' className='btn btn-primary form-control'> Submit </button>
-    </form>
+    <Form onSubmit={submitHandler}>
+      <FormGroup>
+        <Input type='text' name='username' placeholder='username' />
+      </FormGroup>
+      <FormGroup>
+        <Input type='password' name='password' placeholder='password' />
+      </FormGroup>
+      <Button type='submit' color='primary' block> Submit </Button>
+    </Form>
   )
 }
+
+export default Login

@@ -1,4 +1,6 @@
 import React from 'react'
+import {Button, Form, FormGroup, Input} from 'reactstrap'
+
 import Login from './Login'
 
 const submitHandler = e => {
@@ -18,16 +20,16 @@ const submitHandler = e => {
   e.target.reset()
 }
 
-const Form = ({userId}) => {
-  return ! userId
-  ? <Login/>
-  : (<form onSubmit={submitHandler}>
-      <input type='number' name='blocknumber' placeholder='blocknumber' className='form-control'/>
-      <textarea name='participants' rows='10' cols='30' className='form-control' >
-      </textarea>
-      <button type='submit' className='btn btn-primary form-control'> Submit </button>
-    </form>
-  )
-}
+const Setup = ({userId}) => !userId
+  ? <Login />
+  : <Form onSubmit={submitHandler}>
+    <FormGroup>
+      <Input type='number' name='blocknumber' placeholder='blocknumber' />
+    </FormGroup>
+    <FormGroup>
+      <Input type='textarea' name='participants' rows='10' cols='30' />
+    </FormGroup>
+    <Button type='submit' color='primary' block> Submit </Button>
+  </Form>
 
-export default Form
+export default Setup
