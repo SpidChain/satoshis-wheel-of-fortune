@@ -2,7 +2,6 @@ import React from 'react'
 import {Col, Container, Row} from 'reactstrap'
 
 const Participants = ({participants, loading}) => {
-  console.log('participants', participants, loading)
   return (
     <Container fluid>
       <Row>

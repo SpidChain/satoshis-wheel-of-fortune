@@ -122,7 +122,6 @@ const Main = createReactClass({
 
   render () {
     const names = this.props.participants.map((e) => e.name)
-    console.log('participants', this.props.participants)
     if (this.props.loading) {
       return <p> loading </p>
     }

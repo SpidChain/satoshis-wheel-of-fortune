@@ -22,7 +22,6 @@ const NavBar = createReactClass({
   },
 
   render () {
-    console.log(this.props.userId)
     const LogoutButton = this.props.userId
       ? <Button onClick={this.logout}>Logout</Button>
       : null

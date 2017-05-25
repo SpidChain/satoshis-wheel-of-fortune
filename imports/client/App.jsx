@@ -7,7 +7,6 @@ import Setup from '/imports/client/Setup'
 import Participants from '/imports/client/Participants'
 
 const App = ({loading, participants, blockNumber, userId}) => {
-  console.log('participants are', participants)
   return (<BrowserRouter history={browserHistory}>
     <div>
       <NavBar userId={userId} />
