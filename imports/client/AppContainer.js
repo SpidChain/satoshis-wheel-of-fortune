@@ -18,9 +18,8 @@ const AppContainer = createContainer(() => {
     loading,
     participants,
     blockNumber: number,
-    userId,
+    userId
   }
 }, App)
-
 
 export default AppContainer

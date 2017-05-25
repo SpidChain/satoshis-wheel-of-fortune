@@ -1,9 +1,10 @@
-import { Accounts } from 'meteor/accounts-base'
+import {Accounts} from 'meteor/accounts-base'
+import {Meteor} from 'meteor/meteor'
 
 const createAdmin = () => {
-  username = Meteor.settings.username
-  password = Meteor.settings.password
-  if(! Meteor.users || Meteor.users.find().count() === 0) {
+  const username = Meteor.settings.username
+  const password = Meteor.settings.password
+  if (!Meteor.users || Meteor.users.find().count() === 0) {
     Accounts.createUser({username, password})
   }
 }

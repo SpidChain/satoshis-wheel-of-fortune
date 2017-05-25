@@ -1,5 +1,4 @@
 import React from 'react'
-import {Meteor} from 'meteor/meteor'
 import {BrowserRouter, Route, browserHistory} from 'react-router-dom'
 
 import NavBar from '/imports/client/NavBar'
@@ -11,23 +10,22 @@ const App = ({loading, participants, blockNumber, userId}) => {
   console.log('participants are', participants)
   return (<BrowserRouter history={browserHistory}>
     <div>
-      <NavBar userId={userId}/>
+      <NavBar userId={userId} />
       <Route exact path='/' component={props => <Main
-          loading={loading}
-          participants={participants}
-          blockNumber={blockNumber}
-          userId={userId}/>}/>
+        loading={loading}
+        participants={participants}
+        blockNumber={blockNumber}
+        userId={userId} />} />
 
-      <Route exact path='/setup' component={(props) => <Setup userId={userId}/>} />
+      <Route exact path='/setup' component={(props) => <Setup userId={userId} />} />
 
       <Route exact path='/participants' component={(props) =>
-          <Participants {...props}
-            participants={participants}
-            loading={loading}/>} />
-      </div>
-    </BrowserRouter>
+        <Participants {...props}
+          participants={participants}
+          loading={loading} />} />
+    </div>
+  </BrowserRouter>
   )
 }
 
 export default App
-

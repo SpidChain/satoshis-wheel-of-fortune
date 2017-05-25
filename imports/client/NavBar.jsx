@@ -2,6 +2,7 @@ import React from 'react'
 import createReactClass from 'create-react-class'
 import {Collapse, Button, Nav, NavItem, Navbar, NavbarBrand, NavbarToggler} from 'reactstrap'
 import {NavLink} from 'react-router-dom'
+import {Meteor} from 'meteor/meteor'
 
 const NavBar = createReactClass({
   displayName: 'NavBar',
@@ -22,9 +23,9 @@ const NavBar = createReactClass({
 
   render () {
     console.log(this.props.userId)
-    const LogoutButton =this.props.userId
+    const LogoutButton = this.props.userId
       ? <Button onClick={this.logout}>Logout</Button>
-      : <div></div>
+      : <div />
     return <Navbar toggleable='xs' light color='faded'>
       <NavbarToggler onClick={this.toggle} right data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation' />
       <NavbarBrand>Spidchain</NavbarBrand>

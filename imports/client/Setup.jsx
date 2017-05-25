@@ -1,5 +1,6 @@
 import React from 'react'
 import {Button, Form, FormGroup, Input} from 'reactstrap'
+import {Meteor} from 'meteor/meteor'
 
 import Login from './Login'
 

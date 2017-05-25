@@ -1,13 +1,14 @@
 import React from 'react'
 import {Button, Form, FormGroup, Input} from 'reactstrap'
+import {Meteor} from 'meteor/meteor'
 
 const submitHandler = e => {
   e.preventDefault()
   const username = e.target.username.value
   const password = e.target.password.value
-  Meteor.loginWithPassword(username, password, function(err){
+  Meteor.loginWithPassword(username, password, function (err) {
     if (err) {
-      return    console.log(err.reason)
+      return console.log(err.reason)
     }
   })
 }
