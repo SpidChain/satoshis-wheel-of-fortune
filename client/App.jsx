@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {Meteor} from 'meteor/meteor'
 import {BrowserRouter, Route, browserHistory, Link} from 'react-router-dom'
 
-import Main from '/imports/client/Main'
+import MainContainer from '/imports/client/MainContainer'
 import Setup from '/imports/client/Setup'
 import ParticipantsContainer from '/imports/client/ParticipantsContainer'
 import {initWheel} from '/imports/client/wheel'
@@ -25,7 +25,7 @@ Meteor.startup(() => {
             </ul>
           </div>
           </nav>
-          <Route exact={true} path="/" component={Main}/>
+          <Route exact={true} path="/" component={MainContainer}/>
           <Route path="/setup" component={Setup}/>
           <Route path="/participants" component={ParticipantsContainer}/>
         </div>
