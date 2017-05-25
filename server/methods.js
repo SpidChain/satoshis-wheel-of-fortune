@@ -8,7 +8,7 @@ Meteor.methods({
     ParticipantsC.remove({})
     participants
       .split('\n')
-      .forEach((e) => ParticipantsC.insert({name: e}))
+      .forEach((e) => ParticipantsC.insert({name: e.trim()}))
   },
 
   setBlocknumber: (blocknumber) => {
