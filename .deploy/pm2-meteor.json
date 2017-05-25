@@ -1,0 +1,23 @@
+{
+  "appName": "satoshis-lottery",
+  "appLocation": {
+    "local": "../"
+  },
+  "meteorSettingsLocation": "./settings.json",
+  "meteorBuildFlags": "--architecture os.linux.x86_64",
+  "meteorSettingsInRepo": false,
+  "env": {
+    "ROOT_URL": "http://178.62.249.188",
+    "PORT": 80,
+    "MONGO_URL": "mongodb://localhost:27017/satoshi-lottery"
+  },
+  "server": {
+    "host": "178.62.249.188",
+    "username": "root",
+    "password": "",
+    "deploymentDir": "/opt/sathoshis-lottery",
+    "exec_mode": "cluster_mode",
+    "instances": 1
+  }
+}
+
