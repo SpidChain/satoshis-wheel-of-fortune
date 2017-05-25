@@ -35,6 +35,9 @@
     "reactstrap": "^4.6.2"
   },
   "devDependencies": {
-    "standard": "^10.0.2"
+    "standard": "*"
+  },
+  "standard": {
+    "ignore": "Winwheel.js"
   }
 }
