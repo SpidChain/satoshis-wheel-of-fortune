@@ -65,7 +65,8 @@ const Main = createReactClass({
           console.log('Nonce:', block.nonce)
           that.setState({
             fetching: false,
-            nonce: block.nonce
+            nonce: block.nonce,
+            spinning: true
           })
         }
       }
@@ -104,7 +105,8 @@ const Main = createReactClass({
           const nonce = blocks[0].nonce
           this.setState({
             fetching: false,
-            nonce: nonce
+            nonce: nonce,
+            showResult: true
           })
           console.log('Nonce:', nonce)
         }
@@ -116,7 +118,8 @@ const Main = createReactClass({
 
   stopSpin () {
     this.setState({
-      showResult: true
+      showResult: true,
+      spinning: false
     })
   },
 
