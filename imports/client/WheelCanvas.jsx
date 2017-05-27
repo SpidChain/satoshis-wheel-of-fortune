@@ -11,7 +11,7 @@ const colorArray = [
   '#f26522'
 ]
 
-const newWheel = (emails, onStop) => {
+const newWheel = (emails, onStop, initialAngle) => {
   const segments = emails.map((e, i) => ({
     fillStyle: colorArray[i % 5],
     text: e
@@ -24,6 +24,7 @@ const newWheel = (emails, onStop) => {
     textOrientation: 'vertical', // Make text vertial so goes down from the outside of wheel.
     textAlignment: 'outer',    // Align text to outside of wheel.
     numSegments: emails.length,         // Specify number of segments.
+    rotationAngle: initialAngle || 0,
     segments: segments,
     animation: {
       type: 'spinToStop',
@@ -37,6 +38,8 @@ const newWheel = (emails, onStop) => {
   return wheel
 }
 
+const winnerAngle = (emails, nonce) => 360 / emails.length * (nonce % emails.length + 0.5)
+
 export default createReactClass({
   displayName: 'WheelCanvas',
 
@@ -47,27 +50,26 @@ export default createReactClass({
   },
 
   componentDidMount () {
-    const {emails, onStop} = this.props
-    this.setState({
-      theWheel: newWheel(emails, onStop)
-    })
-  },
+    const {emails, nonce, onStop} = this.props
 
-  shouldComponentUpdate ({spinning}) {
-    return spinning
+    if (Number.isInteger(nonce)) {
+      this.setState({
+        theWheel: newWheel(emails, onStop, winnerAngle(emails, nonce))
+      })
+    } else {
+      this.setState({
+        theWheel: newWheel(emails, onStop)
+      })
+    }
   },
 
   componentDidUpdate () {
     const {emails, nonce, spinning} = this.props
     if (Number.isInteger(nonce) && spinning) {
       console.log('Start spinning.')
-      this.state.theWheel.animation.stopAngle = 360 / emails.length * (nonce % emails.length + 0.5)
+      this.state.theWheel.animation.stopAngle = winnerAngle(emails, nonce)
       this.state.theWheel.startAnimation()
     }
-  },
-
-  componentWillUnmount () {
-    console.log('unmounting');
   },
 
   render () {
