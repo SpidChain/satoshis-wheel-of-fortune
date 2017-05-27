@@ -1,5 +1,6 @@
 import React from 'react'
 import createReactClass from 'create-react-class'
+import {Meteor} from 'meteor/meteor'
 import {BrowserRouter, Route, browserHistory} from 'react-router-dom'
 import GitHubForkRibbon from 'react-github-fork-ribbon'
 
@@ -9,7 +10,6 @@ import Setup from '/imports/client/Setup'
 import Participants from '/imports/client/Participants'
 
 const wsUrl = 'wss://ws.blockchain.info/inv'
-const blockUrl = 'https://api-r.bitcoinchain.com/v1/block/'
 
 const App = createReactClass({
   displayName: 'App',
@@ -91,31 +91,25 @@ const App = createReactClass({
   },
 
   getNonce (blockNumber) {
-    console.log('Block number:', blockNumber)
-
-    if (!Number.isInteger(blockNumber)) {
-      return
-    }
-
     this.setState({
       fetching: true
     })
-    window.fetch(blockUrl + blockNumber)
-      .then((response) => response.json())
-      .then((blocks) => {
-        if (this.state.fetching) {
-          const nonce = blocks[0].nonce
-          this.setState({
-            fetching: false,
-            nonce: nonce,
-            showResult: true
-          })
-          console.log('Nonce:', nonce)
-        }
-      })
-      .catch(() => {
+
+    Meteor.call('getNonce', (err, nonce) => {
+      if (err) {
         console.log('Waiting for block:', blockNumber)
-      })
+        return
+      }
+
+      if (this.state.fetching) {
+        this.setState({
+          fetching: false,
+          nonce: nonce,
+          showResult: true
+        })
+        console.log('Nonce:', nonce)
+      }
+    })
   },
 
   stopSpin () {
