@@ -7,7 +7,7 @@ const Participants = ({participants, loading}) => {
       <Col md='12'>
         {loading
           ? <p> loading... </p>
-          : <ol> {participants.map(e => <li key={e._id}> {e.name} </li>)} </ol>
+          : <ol start='0'> {participants.map(e => <li key={e._id}> {e.name} </li>)} </ol>
         }
       </Col>
     </Row>
