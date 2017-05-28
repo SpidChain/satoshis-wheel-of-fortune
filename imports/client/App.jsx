@@ -99,6 +99,12 @@ const App = createReactClass({
     Meteor.call('getNonce', (err, nonce) => {
       if (err) {
         console.log('Waiting for block:', blockNumber)
+        this.setState({
+          fetching: true,
+          nonce: undefined,
+          showResult: false
+        })
+
         return
       }
 
