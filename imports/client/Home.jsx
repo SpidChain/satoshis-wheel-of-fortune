@@ -22,15 +22,15 @@ const Home = ({
   }
   return <div>
     <Row>
-      <Col md='12'>
+      <Col>
         <Winner winner={showResult && names[nonce % names.length]} />
       </Col>
     </Row>
     <Row>
-      <Col md='9'>
+      <Col xs='12' sm='9'>
         <WheelCanvas emails={names} nonce={nonce} spinning={spinning} onStop={onStop} />
       </Col>
-      <Col md='3'>
+      <Col xs='12' sm='3'>
         <ResultForm blockNumber={blockNumber} nonce={showResult && nonce} partecipants={names.length} />
         <br />
         <ConnectionAlert active={connectionActive} />
