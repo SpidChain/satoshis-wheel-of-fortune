@@ -54,7 +54,7 @@ export default createReactClass({
 
     if (Number.isInteger(nonce)) {
       this.setState({
-        theWheel: newWheel(emails, onStop, winnerAngle(emails, nonce))
+        theWheel: newWheel(emails, onStop, -winnerAngle(emails, nonce))
       })
     } else {
       this.setState({
