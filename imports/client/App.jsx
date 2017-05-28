@@ -82,6 +82,10 @@ const App = createReactClass({
 
   componentWillReceiveProps (nextProps) {
     if (this.props.blockNumber !== nextProps.blockNumber) {
+      this.setState({
+        nonce: undefined,
+        showResult: false
+      })
       this.getNonce(nextProps.blockNumber)
     }
   },
@@ -96,18 +100,13 @@ const App = createReactClass({
       fetching: true
     })
 
-    Meteor.call('getNonce', (err, {nonce, number}) => {
+    Meteor.call('getNonce', (err, result) => {
       if (err) {
         console.log('Waiting for block:', blockNumber)
-        this.setState({
-          fetching: true,
-          nonce: undefined,
-          showResult: false
-        })
-
         return
       }
 
+      const {nonce, number} = result
       if (this.state.fetching && number === blockNumber) {
         this.setState({
           fetching: false,
