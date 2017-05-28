@@ -33,7 +33,10 @@ Meteor.methods({
         uri: `https://blockchain.info/block-height/${blocknumber}?format=json`,
         json: true
       })
-      return response.blocks[0].nonce
+      return {
+        nonce: response.blocks[0].nonce,
+        number: blocknumber
+      }
     } catch (e) {
       throw new Meteor.Error('GetNonceError', 'Could not block retrieve nonce from blockchain.info')
     }

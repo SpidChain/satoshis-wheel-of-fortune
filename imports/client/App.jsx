@@ -96,7 +96,7 @@ const App = createReactClass({
       fetching: true
     })
 
-    Meteor.call('getNonce', (err, nonce) => {
+    Meteor.call('getNonce', (err, {nonce, number}) => {
       if (err) {
         console.log('Waiting for block:', blockNumber)
         this.setState({
@@ -108,7 +108,7 @@ const App = createReactClass({
         return
       }
 
-      if (this.state.fetching) {
+      if (this.state.fetching && number === blockNumber) {
         this.setState({
           fetching: false,
           nonce: nonce,
