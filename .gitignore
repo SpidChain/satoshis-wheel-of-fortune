@@ -1,1 +1,3 @@
 node_modules/
+.deploy/pm2-meteor.json
+.deploy/settings.json

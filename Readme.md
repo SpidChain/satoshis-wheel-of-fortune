@@ -8,7 +8,8 @@ uses the api from blockchain.info to retrieve the nonce for the given block
 number and extracts a name from the list using the formula `n = nonce %
 num_participants`.
 
-The username and password for the admin can be set in the file `.deploy/settings`.
+The username and password for the admin can be set in the file
+`.deploy/settings.json`.
 
 Run locally with:
 
@@ -18,7 +19,9 @@ Run locally with:
 To deploy you need to have
 [pm2-meteor](https://github.com/andruschka/pm2-meteor) installed locally. You
 also need a server with node, mongo and [pm2](https://github.com/Unitech/pm2).
-Then edit the file `.deploy/pm2-meteor.json` and deploy with:
+Rename `.deploy/pm2-meteor-template.json`  to `.deploy/pm2-meteor.json`  and
+`.deploy/settings-template.json`  to `.deploy/settings.json` Then edit those
+two files and deploy with:
 
     cd .deploy
     pm2-meteor deploy
