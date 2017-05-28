@@ -3,6 +3,7 @@ import createReactClass from 'create-react-class'
 import {Meteor} from 'meteor/meteor'
 import {BrowserRouter, Route, browserHistory} from 'react-router-dom'
 import GitHubForkRibbon from 'react-github-fork-ribbon'
+import {Container} from 'reactstrap'
 
 import NavBar from '/imports/client/NavBar'
 import Home from '/imports/client/Home'
@@ -132,20 +133,22 @@ const App = createReactClass({
 
         <NavBar userId={this.props.userId} />
 
-        <Route exact path='/' component={() => <Home
-          {...this.state}
-          loading={this.props.loading}
-          participants={this.props.participants}
-          blockNumber={this.props.blockNumber}
-          onStop={this.stopSpin}
-        />} />
-
-        <Route exact path='/setup' component={(props) => <Setup userId={this.props.userId} />} />
-
-        <Route exact path='/participants' component={(props) =>
-          <Participants {...props}
+        <Container fluid>
+          <Route exact path='/' component={() => <Home
+            {...this.state}
+            loading={this.props.loading}
             participants={this.props.participants}
-            loading={this.props.loading} />} />
+            blockNumber={this.props.blockNumber}
+            onStop={this.stopSpin}
+              />} />
+
+          <Route exact path='/setup' component={(props) => <Setup userId={this.props.userId} />} />
+
+          <Route exact path='/participants' component={(props) =>
+            <Participants {...props}
+              participants={this.props.participants}
+              loading={this.props.loading} />} />
+        </Container>
       </div>
     </BrowserRouter>
   }

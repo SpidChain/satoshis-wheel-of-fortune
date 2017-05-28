@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Container, Form, FormGroup, FormText, Input, Label, Row} from 'reactstrap'
+import {Button, Col, Form, FormGroup, FormText, Input, Label, Row} from 'reactstrap'
 import {Meteor} from 'meteor/meteor'
 
 import Login from './Login'
@@ -22,8 +22,8 @@ const submitHandler = e => {
 }
 
 const Setup = ({userId}) => !userId
-  ? <Container fluid><Row><Col xs='12'><Login /></Col></Row></Container>
-  : <Container fluid>
+  ? <Row><Col xs='12'><Login /></Col></Row>
+  : (
     <Row>
       <Col xs='12'>
         <Form onSubmit={submitHandler}>
@@ -42,6 +42,6 @@ const Setup = ({userId}) => !userId
         </Form>
       </Col>
     </Row>
-  </Container>
+  )
 
 export default Setup

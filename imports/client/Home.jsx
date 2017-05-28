@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Container, Row} from 'reactstrap'
+import {Col, Row} from 'reactstrap'
 
 import ConnectionAlert from './ConnectionAlert'
 import ResultForm from './ResultForm'
@@ -20,7 +20,7 @@ const Home = ({
   if (loading) {
     return <p> loading </p>
   }
-  return <Container fluid>
+  return <div>
     <Row>
       <Col md='12'>
         <Winner winner={showResult && names[nonce % names.length]} />
@@ -36,7 +36,7 @@ const Home = ({
         <ConnectionAlert active={connectionActive} />
       </Col>
     </Row>
-  </Container>
+  </div>
 }
 
 export default Home
